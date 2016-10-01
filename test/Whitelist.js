@@ -82,7 +82,7 @@ specs.forEach(function (spec) {
       })
     }
 
-    it ('Should return a 400 response if an unsafe parameter is detected', function (done) {
+    it('Should return a 400 response if an unsafe parameter is detected', function (done) {
       var request = { headers: {}, query: { foo: { $bar: 'baz' } } }
       var response = {
         status: function (code) {

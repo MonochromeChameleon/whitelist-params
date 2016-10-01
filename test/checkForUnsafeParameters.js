@@ -6,7 +6,7 @@ var checkForUnsafeParameters = require('../lib/checkForUnsafeParameters')
 
 describe('The checkForUnsafeParameters utility', function () {
   var safeTypes = [
-    { name: 'falsey', values: [undefined, null, false, 0, NaN, '', ""] },
+    { name: 'falsey', values: [undefined, null, false, 0, NaN, ''] },
     { name: 'number', values: [1] },
     { name: 'boolean', values: [true] }
   ]
@@ -29,8 +29,8 @@ describe('The checkForUnsafeParameters utility', function () {
     assert(!checkForUnsafeParameters(['foo', 'bar', '$baz', 'bam']))
   })
 
-  it ('should recurse over objects', function () {
-    assert(checkForUnsafeParameters({ foo: 'foo', bar: { baz: 'baz', bam: ['foo', 'bar', 'baz'] }}));
-    assert(!checkForUnsafeParameters({ foo: 'foo', bar: { baz: 'baz', bam: ['foo', 'bar', '$baz'] }}));
+  it('should recurse over objects', function () {
+    assert(checkForUnsafeParameters({ foo: 'foo', bar: { baz: 'baz', bam: ['foo', 'bar', 'baz'] } }))
+    assert(!checkForUnsafeParameters({ foo: 'foo', bar: { baz: 'baz', bam: ['foo', 'bar', '$baz'] } }))
   })
 })
