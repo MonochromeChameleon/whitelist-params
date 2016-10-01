@@ -82,6 +82,19 @@ specs.forEach(function (spec) {
       })
     }
 
+    it ('Should return a 400 response if an unsafe parameter is detected', function (done) {
+      var request = { headers: {}, query: { foo: { $bar: 'baz' } } }
+      var response = {
+        status: function (code) {
+          assert(code === 400)
+          return response
+        },
+        send: done
+      }
+
+      spec.func()('foo', 'bar')(request, response)
+    })
+
     it('Should return a chainable wrapper', function () {
       var result = spec.func()()
       functionNames.forEach(function (func) {
