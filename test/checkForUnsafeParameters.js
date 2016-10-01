@@ -24,6 +24,10 @@ describe('The checkForUnsafeParameters utility', function () {
     assert(!checkForUnsafeParameters('$foo'))
   })
 
+  it('should always return false for functions', function () {
+    assert(!checkForUnsafeParameters(function () {}))
+  })
+
   it('should recurse over arrays', function () {
     assert(checkForUnsafeParameters(['foo', 'bar', 'baz', 'bam']))
     assert(!checkForUnsafeParameters(['foo', 'bar', '$baz', 'bam']))
